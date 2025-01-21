@@ -4,7 +4,7 @@ const initialState = {
   favCompanies: [],
 };
 
-const mainReducer = (state = initialState, action) => {
+const favouritesReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_FAVOURITE:
       return {
@@ -25,4 +25,4 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export default mainReducer;
+export default favouritesReducer;

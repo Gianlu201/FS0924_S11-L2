@@ -9,7 +9,7 @@ const CompanySearchResults = () => {
   const params = useParams();
 
   const content = useSelector((state) => {
-    return state.favCompanies;
+    return state.favourites.favCompanies;
   });
 
   const baseEndpoint =
