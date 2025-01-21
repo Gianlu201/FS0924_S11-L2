@@ -2,22 +2,20 @@ import { Row, Col } from 'react-bootstrap';
 import { Bookmark, BookmarkFill } from 'react-bootstrap-icons';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+  addToFavouriteAction,
+  removeFromFavouriteAction,
+} from '../redux/actions';
 
 const Job = ({ data, favs }) => {
   const dispatch = useDispatch();
 
   const addToFavourite = (data) => {
-    dispatch({
-      type: 'ADD_TO_FAVOURITE',
-      payload: data.company_name,
-    });
+    dispatch(addToFavouriteAction(data));
   };
 
   const removeFromFavourite = (data) => {
-    dispatch({
-      type: 'REMOVE_FROM_FAVOURITE',
-      payload: data.company_name,
-    });
+    dispatch(removeFromFavouriteAction(data.company_name));
   };
 
   return (

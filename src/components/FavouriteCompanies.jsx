@@ -2,6 +2,7 @@ import { Alert, Col, Container, ListGroup } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { removeFromFavouriteAction } from '../redux/actions';
 
 const FavouriteCompanies = () => {
   const content = useSelector((state) => {
@@ -11,10 +12,7 @@ const FavouriteCompanies = () => {
   const dispatch = useDispatch();
 
   const removeFromFavourite = (companyName) => {
-    dispatch({
-      type: 'REMOVE_FROM_FAVOURITE',
-      payload: companyName,
-    });
+    dispatch(removeFromFavouriteAction(companyName));
   };
 
   return (

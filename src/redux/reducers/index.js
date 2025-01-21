@@ -1,16 +1,18 @@
+import { ADD_TO_FAVOURITE, REMOVE_FROM_FAVOURITE } from '../actions';
+
 const initialState = {
   favCompanies: [],
 };
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_TO_FAVOURITE':
+    case ADD_TO_FAVOURITE:
       return {
         ...state,
         favCompanies: state.favCompanies.concat(action.payload),
       };
 
-    case 'REMOVE_FROM_FAVOURITE':
+    case REMOVE_FROM_FAVOURITE:
       return {
         ...state,
         favCompanies: state.favCompanies.filter((comp) => {
