@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Spinner, Alert } from 'react-bootstrap';
 import Job from './Job';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSearchedCompaniesAction } from '../redux/actions/index';
@@ -14,6 +14,9 @@ const MainSearch = () => {
   const dispatch = useDispatch();
 
   const jobsFound = useSelector((state) => state.searched.searchedCompanies);
+  const isLoading = useSelector((state) => state.searched.isLoading);
+  const errorMessage = useSelector((state) => state.searched.errorMessage);
+  const noResults = useSelector((state) => state.searched.noResults);
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -22,6 +25,7 @@ const MainSearch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(getSearchedCompaniesAction(query));
+    setQuery('');
   };
 
   return (
@@ -40,6 +44,26 @@ const MainSearch = () => {
             />
           </Form>
         </Col>
+
+        {isLoading && !errorMessage && (
+          <Col xs={10} className='mx-auto mb-5 mt-4'>
+            <Spinner variant='info' />
+          </Col>
+        )}
+
+        {errorMessage && (
+          <Col xs={10} className='mx-auto mt-3'>
+            <Alert variant='danger'>{errorMessage}</Alert>
+          </Col>
+        )}
+
+        {noResults && (
+          <Col xs={10} className='mx-auto mb-5 mt-3'>
+            <Alert variant='secondary' className='lead'>
+              La ricerca non ha prodotto risultati!
+            </Alert>
+          </Col>
+        )}
 
         {jobsFound.length > 0 && (
           <Col xs={10} className='mx-auto mb-5'>
